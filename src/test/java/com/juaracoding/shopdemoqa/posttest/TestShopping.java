@@ -18,21 +18,17 @@ public class TestShopping {
 	private Search search;
 	private PlaceOrder placeOrder;
 	
-	@Before
-	public void setup() {
-		DriverSingleton.getInstance(Constant .CHROME);
-		search = new Search();
-		placeOrder = new PlaceOrder();
-		
+	public TestShopping() {
+		driver = Hook.driver;
 	}
 	
-	@Given("user navigate to web page")
+	@When("user navigate to web page")
 	public void user_navigate_to_web_page() {
 		driver = DriverSingleton.getDriver();
 		driver.get(Constant.URLPostTest);
 	}
 	
-	@When("search item")
+	@And("search item")
 	public void search_item() {
 		search.searchItem("pink");
 	}
@@ -43,7 +39,7 @@ public class TestShopping {
 		placeOrder.checkOut();
 	}
 	
-	@When("user filling billing detail")
+	@And("user filling billing detail")
 	public void user_filling_billing_detail() {
 		placeOrder.billingDetails();
 		placeOrder.terms();

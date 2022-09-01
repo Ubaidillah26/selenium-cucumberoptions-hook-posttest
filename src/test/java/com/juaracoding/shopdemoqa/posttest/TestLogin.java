@@ -16,20 +16,17 @@ public class TestLogin {
 	public static WebDriver driver;
 	private Login login;
 	
-	@Before
-	public void setup() {
-		DriverSingleton .getInstance(Constant .CHROME);
-		login  = new Login();
-		
+	public TestLogin() {
+		driver = Hook.driver;
 	}
 	
-	@Given("User invalid Login")
+	@When("User invalid Login")
 	public void user_invalid_login() {
 		driver = DriverSingleton.getDriver();
 		driver.get(Constant .URLPostTest);
 	}
 	
-	@When("user enter username password")
+	@And("user enter username password")
 	public void user_enter_username_password() {
 		login.login("ubaidillah.jobs@gmail.com", "ubai123456789");
 	}
