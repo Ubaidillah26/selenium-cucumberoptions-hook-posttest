@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import com.juaracoding.shopdemoqa.driversingleton.DriverSingleton;
 import com.juaracoding.shopdemoqa.posttest24.Login;
 import com.juaracoding.shopdemoqa.utils.Constant;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import io.cucumber.java.*;
 import io.cucumber.java.en.*;
@@ -14,26 +16,31 @@ import io.cucumber.java.en.*;
 public class TestLogin {
 
 	public static WebDriver driver;
+	private static ExtentTest extentTest;
 	private Login login;
 	
 	public TestLogin() {
 		driver = Hook.driver;
+		extentTest = Hook.extentTest;
 	}
 	
 	@When("User invalid Login")
 	public void user_invalid_login() {
 		driver = DriverSingleton.getDriver();
 		driver.get(Constant .URLPostTest);
+		extentTest.log(LogStatus.PASS, "User invalid Login");
 	}
 	
 	@And("user enter username password")
 	public void user_enter_username_password() {
 		login.login("ubaidillah.jobs@gmail.com", "ubai123456789");
+		extentTest.log(LogStatus.PASS, "User enter username password");
 	}
 	
 	@And("user click button login")
 	public void user_click_button_login() {
 		login.clickLogin();
+		extentTest.log(LogStatus.PASS, "User click button login");
 	}
 	
 	@Then("validate page with scenario")
@@ -44,6 +51,7 @@ public class TestLogin {
 		}else if(isValid.equalsIgnoreCase("invalid")) {
 			String actual = login.validate(isValid);
 			assertTrue(actual.contains("is incorrect"));
+			extentTest.log(LogStatus.PASS, "User page with scenario");
 		}
 	}
 	
